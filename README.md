@@ -25,17 +25,17 @@
 通过终端进入到cd /Users/wiserwong/androidPjt/JniDemo/app/build/intermediates/classes/debug debug目录下然后通过命令行
 javah com.wiser.jnidemo.jni.JniUtil命令行生成.h头文件com_wiser_jnidemo_jni_JniUtil.h文件
 # 创建jni目录
-1、在main目录下创建jni目录,然后把生成的.h文件拷贝过去
-2、然后创建.cpp文件 导入.h头文件然后执行java底层方法,返回类型是String jni中使用jstring, 方法名就是java+包名+类名+方法名
+## 1、在main目录下创建jni目录,然后把生成的.h文件拷贝过去
+## 2、然后创建.cpp文件 导入.h头文件然后执行java底层方法,返回类型是String jni中使用jstring, 方法名就是java+包名+类名+方法名
 #include "com_wiser_jnidemo_jni_JniUtil.h"
 JNIEXPORT jstring JNICALL Java_com_wiser_jnidemo_jni_JniUtil_textStr
   (JNIEnv *env, jobject obj)
   {
     return env->NewStringUTF("你好");
   }
-3、构建make project 会生成app/build/intermediates/ndk目录然后 生成Android.mk文件,将Android.mk文件拷贝到jni目录 删除ndk文件夹
-4、修改Android.mk文件 在LOCAL_SRC_FILES=.cpp路径\libstdc++.a
-5、在build.gradle文件中加入
+## 3、构建make project 会生成app/build/intermediates/ndk目录然后 生成Android.mk文件,将Android.mk文件拷贝到jni目录 删除ndk文件夹
+## 4、修改Android.mk文件 在LOCAL_SRC_FILES=.cpp路径\libstdc++.a
+## 5、在build.gradle文件中加入
     externalNativeBuild {
         ndkBuild {
             path "src/main/jni/Android.mk"
